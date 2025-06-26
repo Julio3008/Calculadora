@@ -1,43 +1,105 @@
 * {
   font-family: "Fraunces", serif;
   color: #fff;
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  background-color: #224870;
+  background: linear-gradient(135deg, #3a1c71, #d76d77, #ffaf7b);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  gap: 5px;
+}
+
+.titulo {
+  text-align: center;
+  margin-top: -20px;
+}
+
+.titulo h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: 1px;
+  margin: 0;
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .calculadora {
   display: grid;
   grid-template-columns: repeat(4, 75px);
   grid-template-rows: 160px repeat(5, 75px);
-  background-color: #00916e;
-  padding: 15px;
-  border-radius: 32px;
-  box-shadow: 15px 10px 0px 5px #00000033;
+  background: rgba(22, 22, 26, 0.8);
+  padding: 20px;
+  border-radius: 25px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  animation: scaleIn 0.5s ease-in-out;
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 button {
   cursor: pointer;
-  margin: 5px;
+  margin: 8px;
   padding: 0;
-  border-radius: 32px;
+  border-radius: 50%;
   font-size: 1.5em;
   border: none;
-  background-color: #00916e;
-  box-shadow: 5px 5px 10px -3px #00000040, -5px -5px 15px 3px #00ffc11f;
+  background: linear-gradient(145deg, #1e1e26, #2d2d3a);
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3),
+    -5px -5px 10px rgba(255, 255, 255, 0.05);
+  transition: all 0.2s ease;
+  color: #e0e0e0;
 }
 
 button:active {
-  background-color: #006f54;
+  transform: scale(0.95);
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4),
+    -3px -3px 5px rgba(255, 255, 255, 0.04);
 }
 
 button:focus {
@@ -46,27 +108,116 @@ button:focus {
 
 .col-2 {
   grid-column: span 2;
+  border-radius: 35px;
 }
 
 .display {
   grid-column: 1 / -1;
-  padding: 16px;
+  padding: 20px;
   display: flex;
-  margin: 10px 10px 20px;
+  margin: 10px 10px 25px;
   flex-direction: column;
   align-items: flex-end;
-  background-color: #363636;
-  border-radius: 32px;
+  background: linear-gradient(to right, #141e30, #243b55);
+  border-radius: 15px;
   text-align: right;
   justify-content: space-between;
   word-break: break-all;
-  box-shadow: 0px 0px 0px 10px #00000033;
+  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.display::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(45deg);
+  pointer-events: none;
 }
 
 #valor-actual {
-  font-size: 1.5em;
+  font-size: 1.8em;
+  font-weight: 400;
+  margin-top: 5px;
+  color: #ffffff;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
 }
 
 #valor-anterior {
-  font-size: 2em;
+  font-size: 1.2em;
+  font-weight: 300;
+  color: #a0a0a0;
+  margin-bottom: 5px;
+}
+
+.operador {
+  background: linear-gradient(145deg, #7f3cb1, #6c3399);
+  color: white;
+}
+
+.operador:active {
+  background: linear-gradient(145deg, #6c3399, #5a2c80);
+}
+
+button.numero {
+  background: linear-gradient(145deg, #2e2e3a, #252531);
+}
+
+button.numero:active {
+  background: linear-gradient(145deg, #252531, #1e1e28);
+}
+
+.btn-clear {
+  background: linear-gradient(145deg, #e05252, #c04545);
+  color: white;
+}
+
+.btn-clear:active {
+  background: linear-gradient(145deg, #c04545, #a03838);
+}
+
+.btn-delete {
+  background: linear-gradient(145deg, #e0a33f, #c0892f);
+  color: white;
+}
+
+.btn-delete:active {
+  background: linear-gradient(145deg, #c0892f, #a07328);
+}
+
+.btn-equal {
+  background: linear-gradient(145deg, #32a852, #278442);
+  color: white;
+}
+
+.btn-equal:active {
+  background: linear-gradient(145deg, #278442, #206d35);
+}
+
+@media (max-width: 400px) {
+  .calculadora {
+    grid-template-columns: repeat(4, 65px);
+    grid-template-rows: 140px repeat(5, 65px);
+    padding: 15px;
+  }
+
+  button {
+    margin: 5px;
+    font-size: 1.3em;
+  }
+
+  .titulo h1 {
+    font-size: 1.5rem;
+  }
 }
